@@ -57,20 +57,31 @@ public class HelloApplication extends Application {
     private Boolean isVictory(GridPane gridPane, int i, int j) {
 
 
-        if(winMatrix[i][0] == winMatrix[i][1] && winMatrix[i][0] == winMatrix[i][2]){
-            return disableButtons(gridPane);
+        if (winMatrix[i][0] == winMatrix[i][1] && winMatrix[i][0] == winMatrix[i][2]) {
+            disableButtons(gridPane);
+            return true;
         }
 
-        if(winMatrix[0][j] == winMatrix[1][j] && winMatrix[0][j] == winMatrix[2][j]){
-            return disableButtons(gridPane);
+        if (winMatrix[0][j] == winMatrix[1][j] && winMatrix[0][j] == winMatrix[2][j]) {
+            disableButtons(gridPane);
+            return true;
         }
 
+        if (winMatrix[0][0] != 0 && winMatrix[1][1] != 0 && winMatrix[2][2] != 0 && winMatrix[0][0] == winMatrix[1][1] && winMatrix[0][0] == winMatrix[2][2]) {
+            disableButtons(gridPane);
+            return true;
+        }
+
+        if (winMatrix[0][2] != 0 && winMatrix[1][1] != 0 && winMatrix[2][0] != 0 && winMatrix[0][2] == winMatrix[1][1] && winMatrix[0][2] == winMatrix[2][0]) {
+            disableButtons(gridPane);
+            return true;
+        }
 
 
         return false;
     }
 
-    private Boolean disableButtons(GridPane gridPane) {
+    private void disableButtons(GridPane gridPane) {
         for (int k = 0; k < 3; k++) {
             for (int l = 0; l < 3; l++) {
                 for (Node node : gridPane.getChildren()) {
@@ -80,7 +91,6 @@ public class HelloApplication extends Application {
                 }
             }
         }
-        return true;
     }
 
 
